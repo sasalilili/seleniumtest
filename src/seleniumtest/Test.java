@@ -26,17 +26,9 @@ import org.openqa.selenium.internal.WrapsDriver;
 public class Test {
 	public static void main(String[] args) throws Exception {
 		 System.setProperty("webdriver.gecko.driver","/Users/apple/Downloads/geckodriver");
-	//	 System.setProperty("webdriver.firefox.bin","/Users/apple/Downloads/geckodriver");
-	//	 System.setProperty("webdriver.firefox.bin","/Applications/Firefox.app/Contents/MacOS/firefox");
-		  WebDriver driver=new FirefoxDriver(); 
-	//	  WebDriver driver=new SafariDriver(); 
-		 driver.navigate().to("http://cart.jumeicd.com");  
- 
-		// WebElement loginLink = driver.findElement(By.linkText("登录")); 
-		 //loginLink.click();
-		 //loginLink = driver.findElement(By.id("radio_normal"));
-		 //loginLink.click();   
-
+  		  WebDriver driver=new FirefoxDriver(); 
+ 		 driver.navigate().to("http://cart.jumeicd.com/?cookie_cart_ab=merge_order:new");   
+         // 利用cookies实现自动登陆
 		 driver.manage().addCookie(new Cookie("account","b9dguoXzRE%2B2XdYPNsCvpZVrdRaf50XHDKb21uUa6pY6AlhwYqndLpr7c4efuGsCjozHX9klQxaTcNmMuZ3HWxX0xRQC5fzE6O36a5ESLvkx5e2mesO%2B5jehBOQVA0H3IOBLVgV7Piyt7%2BF6Lz7lKeUiQtVbHk7YjM6ITYI96HeP4kD2YaFNYJgtHbqAYUP1GSVqBopBtDKbgKtDB9GFXw%3D%3D"));
 		 driver.manage().addCookie(new Cookie("tk","75c77130523c1c000ded5b5369cd8b14aa828504"));
 		 driver.manage().addCookie(new Cookie("uid","2000012576"));
@@ -51,9 +43,16 @@ public class Test {
 		 driver.manage().addCookie(new Cookie("_xsptplus428","428.49.1512526690.1512526720.4%234%7C%7C%7C%7C%7C%23%23P2zCm_0PNc2NYziKg174sHcZOAls1dTH%23"));
 		 driver.manage().addCookie(new Cookie("ag_fid","FGJ4TNFqLjN1okFF"));
 		 driver.get("http://cart.jumeicd.com/i/cart/new_items/1027429,,1");
-		// WebElement yanzhengmaLink = driver.findElement(By.xpath("//*[@id=\"change_verify_code\"]/img"));
-		// captureElement(yanzhengmaLink);
-		} 
+		 driver.findElement(By.id("js_all_selector")).click();
+		 driver.findElement(By.xpath("//*[@id=\"1027429_\"]/td[1]/div/input")).click();
+		 driver.findElement(By.id("go_to_order")).click();
+		 Thread.sleep(5000);
+		 WebElement e = driver.findElement(By.className("submit_btn")); 
+		 e.click();
+		 Thread.sleep(5000);
+		 driver.findElement(By.id("JS_btn_confirm_pay")).click();
+		 driver.close();
+  		} 
 	
 	 public static File captureElement(WebElement element) throws Exception {
 	        // TODO Auto-generated method stub
