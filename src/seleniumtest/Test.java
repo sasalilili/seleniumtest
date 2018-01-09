@@ -5,10 +5,7 @@ package seleniumtest;
  
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.File; 
 
 import javax.imageio.ImageIO;
 
@@ -47,7 +44,15 @@ public class Test {
 		 driver.findElement(By.xpath("//*[@id=\"1027429_\"]/td[1]/div/input")).click();
 		 driver.findElement(By.id("go_to_order")).click();
 		 Thread.sleep(5000);
+		 
 		 WebElement e = driver.findElement(By.className("submit_btn")); 
+		 int i =1;
+		 while(e==null&&i<5) {
+			 i++;
+			 Thread.sleep(5000);
+			 e = driver.findElement(By.className("submit_btn")); 
+			 
+		 }
 		 e.click();
 		 Thread.sleep(5000);
 		 driver.findElement(By.id("JS_btn_confirm_pay")).click();
